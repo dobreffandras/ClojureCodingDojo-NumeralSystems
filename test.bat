@@ -1,0 +1,1 @@
+docker run -it --rm -v %~dp0:/usr/src/app -w /usr/src/app clojure lein test
