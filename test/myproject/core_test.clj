@@ -5,7 +5,7 @@
 	(:import 
 		[java.text ParseException SimpleDateFormat]))
 
-(deftest a-test
+(deftest invalid-input
 	(testing "Converter throws exception for invalid input"
 		(is (thrown? ParseException (convert ["asd"]))
 			"Too few arguments")
@@ -17,9 +17,13 @@
 			"Not Roman input")
 		(is (thrown? ParseException (convert ["Urnfield" "Roman" "asd"]))
 			"Not Urnfield input")
+		(is (thrown? ParseException (convert ["a" "Roman" "asd"]))
+			"First parameter is not one of the three possible systems")
+		(is (thrown? ParseException (convert ["Roman" "a" "asd"]))
+			"Second parameter is not one of the three possible systems")
 	))
 
-(deftest a-test
+(deftest arabic-to-roman
 	(testing "Converter converts Arabic to Roman Correctly"
 		(is (= "I" (convert ["Arabic" "Roman" "1"])))
 		(is (= "II" (convert ["Arabic" "Roman" "2"])))
